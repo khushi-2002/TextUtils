@@ -1,26 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function About() {
-  const [myStyle, setMyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-  });
-  const [enableMode, setEnableMode] = useState("Enable Dark Mode");
+export default function About(props) {
+  // const [myStyle, setMyStyle] = useState({
+  //   color: "black",
+  //   backgroundColor: "white",
+  // });
+  //const [enableMode, setEnableMode] = useState("Enable Dark Mode");
 
-  const onHandleDarkMode = () => {
-    if (myStyle.color === "black") {
-      setMyStyle({
-        color: "white",
-        backgroundColor: "black",
-      });
-      setEnableMode("Disable Dark Mode");
-    } else {
-      setMyStyle({
-        color: "black",
-        backgroundColor: "white",
-      });
-      setEnableMode("Enable Dark Mode");
-    }
+  // const onHandleDarkMode = () => {
+  //   if (myStyle.color === "black") {
+  //     setMyStyle({
+  //       color: "white",
+  //       backgroundColor: "black",
+  //     });
+  //     setEnableMode("Disable Dark Mode");
+  //   } else {
+  //     setMyStyle({
+  //       color: "black",
+  //       backgroundColor: "white",
+  //     });
+  //     setEnableMode("Enable Dark Mode");
+  //   }
+  // };
+
+  let myStyle = {
+    color: props.mode === "light" ? "#042743" : "white",
+    backgroundColor: props.mode === "light" ? "white" : "#042743",
   };
   return (
     <>
@@ -123,9 +128,9 @@ export default function About() {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary my-2" onClick={onHandleDarkMode}>
+        {/* <button className="btn btn-primary my-2" onClick={onHandleDarkMode}>
           {enableMode}
-        </button>
+        </button> */}
       </div>
     </>
   );

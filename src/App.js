@@ -3,8 +3,8 @@ import TextForm from "./components/TextForm";
 import "./App.css";
 import { useState } from "react";
 import Alert from "./components/Alert";
-// import { BrowserRouter, Routes, Route } from "react-router";
-// import About from "./components/About";
+import { BrowserRouter, Routes, Route } from "react-router";
+import About from "./components/About";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -64,31 +64,31 @@ function App() {
   };
   return (
     <>
-      {/* <BrowserRouter> */}
-      <Navbar
-        title={"KhushiTextUtils"}
-        aboutText={"About Us"}
-        mode={mode}
-        redMode={redMode}
-        toggleRedmode={toggleRedmode}
-        togglemode={togglemode}
-      />
-      <Alert alert={alert} />
-      {/* <Routes> */}
-      {/* <Route
+      <BrowserRouter>
+        <Navbar
+          title={"KhushiTextUtils"}
+          aboutText={"About Us"}
+          mode={mode}
+          redMode={redMode}
+          toggleRedmode={toggleRedmode}
+          togglemode={togglemode}
+        />
+        <Alert alert={alert} />
+        <Routes>
+          <Route
             exact
             path="/"
-            element={ */}
-      <TextForm
-        heading="Enter the text here to analyze below"
-        mode={mode}
-        showAlert={showAlert}
-      />
-      {/* }
+            element={
+              <TextForm
+                heading="Enter the text here to analyze below"
+                mode={mode}
+                showAlert={showAlert}
+              />
+            }
           />
-          <Route exact path="/about" element={<About />} />
+          <Route exact path="/about" element={<About mode={mode} />} />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 }

@@ -32,6 +32,7 @@ export default function TextForm(props) {
     var text = document.getElementById("exampleFormControlTextarea1");
     text.select();
     navigator.clipboard.writeText(text.value);
+    document.getSelection().removeAllRanges();
     props.showAlert("Succesfully copied the text", "success");
   };
 
@@ -63,27 +64,35 @@ export default function TextForm(props) {
           <button
             className="btn btn-primary my-2 mx-1"
             onClick={onHandleUpperCase}
+            disabled={text.length === 0}
           >
             Convert to UpperCase
           </button>
           <button
             className="btn btn-primary my-2 mx-1"
             onClick={onHandleLowerCase}
+            disabled={text.length === 0}
           >
             Convert to LowerCase
           </button>
-          <button className="btn btn-primary my-2 mx-1" onClick={onHandleClear}>
+          <button
+            className="btn btn-primary my-2 mx-1"
+            onClick={onHandleClear}
+            disabled={text.length === 0}
+          >
             Clear Text
           </button>
           <button
             className="btn btn-primary my-2 mx-1"
             onClick={onHandleGoodWriting}
+            disabled={text.length === 0}
           >
             Click for good writing
           </button>
           <button
             className="btn btn-primary my-2 mx-1"
             onClick={onHandleClearText}
+            disabled={text.length === 0}
           >
             Copy Text
           </button>
@@ -97,9 +106,20 @@ export default function TextForm(props) {
       >
         <h2>Your Summary</h2>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          words and {text.length} characters
         </p>
-        <p>{0.08 * text.split(" ").length} MInutes read</p>
+        <p>
+          {0.08 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          MInutes read
+        </p>
         <h2>Preview</h2>
         <p>{text.length > 0 ? text : "Enter something to preview it here"}</p>
       </div>
