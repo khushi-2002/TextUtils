@@ -28,11 +28,8 @@ export default function TextForm(props) {
     props.showAlert("Converted your text to beautiful text", "success");
   };
 
-  const onHandleClearText = () => {
-    var text = document.getElementById("exampleFormControlTextarea1");
-    text.select();
-    navigator.clipboard.writeText(text.value);
-    document.getSelection().removeAllRanges();
+  const onHandleCopyText = () => {
+    navigator.clipboard.writeText(text);
     props.showAlert("Succesfully copied the text", "success");
   };
 
@@ -91,7 +88,7 @@ export default function TextForm(props) {
           </button>
           <button
             className="btn btn-primary my-2 mx-1"
-            onClick={onHandleClearText}
+            onClick={onHandleCopyText}
             disabled={text.length === 0}
           >
             Copy Text
@@ -107,7 +104,7 @@ export default function TextForm(props) {
         <h2>Your Summary</h2>
         <p>
           {
-            text.split(" ").filter((element) => {
+            text.split(/\s+/).filter((element) => {
               return element.length !== 0;
             }).length
           }{" "}

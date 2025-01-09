@@ -8,7 +8,7 @@ import About from "./components/About";
 
 function App() {
   const [mode, setMode] = useState("light");
-  const [redMode, setRedMode] = useState("light");
+  // const [redMode, setRedMode] = useState("light");
   const [alert, setAlert] = useState(null);
 
   const showAlert = (message, type) => {
@@ -21,11 +21,22 @@ function App() {
     }, 2000);
   };
 
-  const togglemode = () => {
+  const removeclasses = () => {
+    document.body.classList.remove("bg-danger");
+    document.body.classList.remove("bg-primary");
+    document.body.classList.remove("bg-warning");
+    document.body.classList.remove("bg-success");
+    document.body.classList.remove("bg-light");
+    document.body.classList.remove("bg-dark");
+  };
+  const togglemode = (cls) => {
+    console.log(cls);
+    removeclasses();
+    document.body.classList.add("bg-" + cls);
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#042743";
-      document.title = "TextUtils - Dark Mode";
+      // document.title = "TextUtils - Dark Mode";
 
       // setInterval(() => {
       //   document.title = "TextUtils is Amazing";
@@ -38,7 +49,7 @@ function App() {
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
-      document.title = "TextUtils - Light Mode";
+      // document.title = "TextUtils - Light Mode";
 
       // setInterval(() => {
       //   document.title = "TextUtils is Amazing";
@@ -50,18 +61,6 @@ function App() {
       showAlert("Light mode has been enabled", "success");
     }
   };
-
-  const toggleRedmode = () => {
-    if (redMode === "light") {
-      setRedMode("red");
-      document.body.style.backgroundColor = "red";
-      showAlert("Red mode has been enabled", "success");
-    } else {
-      setRedMode("light");
-      document.body.style.backgroundColor = "white";
-      showAlert("Light mode has been enabled", "success");
-    }
-  };
   return (
     <>
       <BrowserRouter>
@@ -69,8 +68,6 @@ function App() {
           title={"KhushiTextUtils"}
           aboutText={"About Us"}
           mode={mode}
-          redMode={redMode}
-          toggleRedmode={toggleRedmode}
           togglemode={togglemode}
         />
         <Alert alert={alert} />
